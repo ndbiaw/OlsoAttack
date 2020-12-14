@@ -58,6 +58,11 @@ class Options:
                                         \033[32;1mCoded by\033[0m \033[36;1m@d3vbl4ck\033[0m
             '''
 
+YU = str(input("Update yokais.txt? [y/n]"))
+    if YU == "n" or YU =="N":
+        pass
+    else:
+        yokaisUpdate()
 
 class Functions:
     @staticmethod
@@ -103,6 +108,25 @@ class Functions:
         #rand param
         return "?t={}".format(randint(666, 96969))
 
+def yokaisUpdate():
+    f = open("yokais.txt", 'wb')
+    try:
+        r = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all&simplified=true")
+        f.write(r.content)
+    except:
+        pass
+    try:
+        r = requests.get("https://www.proxy-list.download/api/v1/get?type=socks5")
+        f.write(r.content)
+    except:
+        pass
+    try:
+        r = requests.get("https://www.proxyscan.io/download?type=socks5")
+        f.write(r.content)
+        f.close()
+    except:
+        f.close()
+    print("yokais.txt update successful!")
 
 class Form:
     @staticmethod
